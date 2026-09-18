@@ -5,10 +5,10 @@ import java.util.Scanner;
 // LeitorCsv l = new LeitorCsv();
 // l.ler("/tmp/veiculos.csv");
 // l.ler("/documentos/veiculos.csv");
-public class LeitorCsv {
+public  class LeitorCsv {
     public static Veiculo[] Ler(String caminhoArquivo) {
         File f = new File(caminhoArquivo);
-        Veiculo[] vetorVeiculos = new Veiculo[501];
+        Veiculo[] vetorVeiculos = new Veiculo[500];
         try {
             Scanner sc = new Scanner(f);
             String cabecalho = sc.nextLine();
@@ -17,7 +17,7 @@ public class LeitorCsv {
                 Veiculo veiculo = Veiculo.parseVeiculo(ler);
                 vetorVeiculos[j] = veiculo;
             }
-        
+            sc.close();
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }

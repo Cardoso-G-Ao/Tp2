@@ -128,7 +128,7 @@ public  class Veiculo{
 
 
         return  "[" + id + " ## " + marca + " ## " + modelo + " ## " + ano + " ## "
-                + categoria + " ## " +"["+combustivel+"]"+ " ## " + cilindros + " ## "
+                + categoria + " ## " +"["+juncaoCombustivel+"]"+ " ## " + cilindros + " ## "
                 + cilindrada + " ## " + transmissao + " ## " + tracao + " ## "
                 + consumoCidade + " ## " + consumoEstrada + " ## " + co2 + " ## "
                 + turbo + " ## " + dataRegistro.format() + "]";
