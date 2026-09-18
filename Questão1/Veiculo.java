@@ -18,9 +18,9 @@ public  class Veiculo{
     private Data dataRegistro;
 
     public Veiculo(int id, String marca, String modelo, int ano, String categoria,
-                   String[] combustivel, int cilindros, double cilindrada,
-                   String transmissao, String tracao, double consumoCidade,
-                   double consumoEstrada, double co2, boolean turbo, Data dataRegistro) {
+                String[] combustivel, int cilindros, double cilindrada,
+                String transmissao, String tracao, double consumoCidade,
+                double consumoEstrada, double co2, boolean turbo, Data dataRegistro) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
@@ -120,6 +120,21 @@ public  class Veiculo{
         cilindrada, transmissao, tracao, consumoCidade, consumoEstrada,
         co2, turbo, dataRegistro);
     }
+    public String format(){
+        String juncaoCombustivel = combustivel[0];
+        for(int i = 1 ; i < combustivel.length ;i++ ){
+            juncaoCombustivel = juncaoCombustivel+","+combustivel[i];
+        }
+
+
+        return  "[" + id + " ## " + marca + " ## " + modelo + " ## " + ano + " ## "
+                + categoria + " ## " +"["+combustivel+"]"+ " ## " + cilindros + " ## "
+                + cilindrada + " ## " + transmissao + " ## " + tracao + " ## "
+                + consumoCidade + " ## " + consumoEstrada + " ## " + co2 + " ## "
+                + turbo + " ## " + dataRegistro.format() + "]";
+                        
+    }
+
     
 }
     
