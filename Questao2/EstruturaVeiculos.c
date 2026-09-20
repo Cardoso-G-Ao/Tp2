@@ -105,7 +105,7 @@ void formatVeiculo(Veiculo v, char *buffer) {
     for (int i = 0; i < v.quantidadeCombustiveis; i++) {
         strcat(comb, v.combustivel[i]);
         if (i < v.quantidadeCombustiveis - 1) {
-            strcat(comb, ";");
+            strcat(comb, ",");
         }
     }
     strcat(comb, "]");
@@ -114,7 +114,7 @@ void formatVeiculo(Veiculo v, char *buffer) {
     formatData(v.dataRegistro, dataStr);
 
     sprintf(buffer,
-            "[%d ## %s ## %s ## %d ## %s ## %s ## %d ## %.2f ## %s ## %s ## %.2f ## %.2f ## %.2f ## %s ## %s]",
+            "[%d ## %s ## %s ## %d ## %s ## %s ## %d ## %.1f ## %s ## %s ## %.2f ## %.2f ## %.1f ## %s ## %s]",
             v.id, v.marca, v.modelo, v.ano, v.categoria, comb, v.cilindros,
             v.cilindrada, v.transmissao, v.tracao, v.consumoCidade,
             v.consumoEstrada, v.emissaoCo2, v.possuiTurbo ? "true" : "false", dataStr);
@@ -169,7 +169,7 @@ int buscaSequencial(Veiculo *veiculos, int n, int id) {
 }
 
 
-
+#ifndef SEM_MAIN
 int main() {
     int n;
     Veiculo *veiculos = lerCsv("veiculos.csv", &n);
@@ -177,11 +177,8 @@ int main() {
     int id;
     char buffer[1024];
 
-    while (scanf("%d", &id) == 1) {
-        if (id == -1) {
-            break;
-        }
-
+    while (scanf("%d", &id) != 1) {
+        
         int pos = buscaSequencial(veiculos, n, id);
         if (pos != -1) {
             formatVeiculo(veiculos[pos], buffer);
@@ -192,3 +189,4 @@ int main() {
     free(veiculos);
     return 0;
 }
+#endif
