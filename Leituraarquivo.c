@@ -152,17 +152,14 @@ Veiculo** lerCsv(char* caminhoArquivo , int* n ){
 int main() {
     int *yes;
     Veiculo **v = lerCsv("veiculos.csv",yes);
+    int id;
 
-    
-
+    scanf("%d",&id);
     while(id != -1){
-        if(id = v.id){
+        
 
-        }
     }
-    
-    
-    
+
 
     return 0;
 }
