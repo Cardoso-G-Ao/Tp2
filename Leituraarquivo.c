@@ -151,15 +151,18 @@ Veiculo** lerCsv(char* caminhoArquivo , int* n ){
 
 int main() {
     int *yes;
-    Veiculo **v = lerCsv("veiculos.csv",yes);
-    int id;
+    Veiculo *v = lerCsv("veiculos.csv",yes);
+    int id, indice, n;
 
     scanf("%d",&id);
-    while(id != -1){
-        
 
+    for(int i = 0; i < n ; i++){
+        if(id == v[i].id){
+            indice = i; 
+            i = n;
+        }
     }
-
+    formatVeiculo(v[indice],n);
 
     return 0;
 }
