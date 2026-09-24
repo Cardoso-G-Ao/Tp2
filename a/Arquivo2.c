@@ -10,6 +10,6 @@ int main(){
       printf("Linha lida: %s", linha);
     }
     fclose(arquivo);
-
+    
     return 0;
 }

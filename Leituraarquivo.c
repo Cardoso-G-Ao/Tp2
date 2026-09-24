@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 typedef struct {
     int ano;
@@ -22,9 +23,10 @@ Data parseData( char* s){
 }
 
 void formatData(Data d , char* buffer){
-    buffer[50];
+    buffer[100];
     sprintf(buffer,"%d-%d-%d",d.ano,d.mes,d.dia);
 }
+
 
 typedef struct {
     int id;
@@ -49,7 +51,7 @@ typedef struct {
     Data dataRegistro;
 } Veiculo;
 
-Veiculo*(char* s){
+Veiculo* parseVeiculo(char* s){
     Veiculo *v = (Veiculo*)malloc(sizeof(Veiculo));
     v->quantCombustivel = 0;
 
@@ -68,57 +70,99 @@ Veiculo*(char* s){
     partes = strtok(NULL,",");
     strcpy(v->categoria,partes);
 
-    partes = strtok(NULL,",");
-    strtok(v->combustivel,partes);//multivalorado
+    char *token = strtok(s, ";");
+    while(token != NULL){
+        strcpy(v->combustivel[v->quantCombustivel], token);
+        v->quantCombustivel++;
+    }
 
     partes = strtok(NULL,",");
     v->cilindros = atoi(partes);
 
     partes = strtok(NULL,",");
     v->cilindrada = atof(partes);
-   
-    partes = strtok(NULL,",");
-    strtok(v->trasmissao,partes);
 
-    campo = strtok(NULL, ",");
+    partes = strtok(NULL,",");
+    strtok(v->transmissao,partes);
+
+    partes = strtok(NULL, ",");
     v->consumoEstrada = atof(partes);
 
-    campo = strtok(NULL, ",");
-    v->emissaoCo2 = atof(partes);
+    partes = strtok(NULL, ",");
+    v->co2 = atof(partes);
 
-    campo = strtok(NULL, ",");
-    v->possuiTurbo = (strcmp(partes, "true") == 0);
+    partes = strtok(NULL, ",");
+    v->turbo = (strcmp(partes, "true") == 0);
 
-    campo = strtok(NULL, ",");
+    partes = strtok(NULL, ",");
     v->dataRegistro = parseData(partes);
 
 
 
-    
-
+    return v;
 }
 
 
 
+void formatVeiculo(Veiculo v , char* buffer){
+buffer[100];
+sprintf(buffer,"%d,%s,%s,%d,%s,%s,%d,%d,%f,%s,%s,%f,%f,%f,%s,%02d-%02d-%02d",
+        v.id,
+        v.marca,
+        v.modelo,
+        v.ano,
+        v.categoria,
+        v.combustivel,
+        v.quantCombustivel,
+        v.cilindros,
+        v.cilindrada,
+        v.transmissao,
+        v.tracao,
+        v.consumoCidade,
+        v.consumoEstrada,
+        v.co2,
+        v.turbo ? true: false,
+        v.dataRegistro.dia,
+        v.dataRegistro.mes,
+        v.dataRegistro.ano);
+}
+
+Veiculo** lerCsv(char* caminhoArquivo , int* n ){
+    FILE *arquivo;
+    char linhas[500];
+    int quant = 0 ;
+    Veiculo **v = (Veiculo**)malloc(510 * sizeof(Veiculo*));
+    arquivo = fopen(caminhoArquivo,"r");
+    if(arquivo == NULL){
+        printf("erro");
+    }
+    else{
+        while(fgets(linhas, sizeof(linhas), stdin) != NULL){
+            if(linhas[0] != '\0'){
+            v[quant] = parseVeiculo(linhas);
+            quant++;    
+            }
+        }
+    }
+    *n = quant;
+    return v;
+}
 
 
 int main() {
-    FILE *arquivo;
-    char linha[500];
+    int *yes;
+    Veiculo **v = lerCsv("veiculos.csv",yes);
 
-    arquivo = fopen("veiculos.csv", "r");
+    
 
-    if (arquivo != NULL) {
+    while(id != -1){
+        if(id = v.id){
 
-        while (fgets(linha, sizeof(linha), arquivo) != NULL) {
-            printf("%s", linha);
         }
-
-        fclose(arquivo);
-
-    } else {
-        printf("Erro ao abrir o arquivo!\n");
     }
+    
+    
+    
 
     return 0;
 }
