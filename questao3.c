@@ -181,15 +181,11 @@ void swap(Veiculo *v,int a, int b)
     v[b] = temp;
 }
 
-void selecao(Veiculo *v, int n){
-
-    for (int i = 0; i < (n - 1); i++)
-    {
+void selecao(Veiculo *v, int n) {
+    for (int i = 0; i < (n - 1); i++) {
         int menor = i;
-        for (int j = (i + 1); j < n; j++)
-        {
-            if (v[j].modelo < v[menor].modelo)
-            {
+        for (int j = (i + 1); j < n; j++) {
+            if (strcmp(v[j].modelo, v[menor].modelo) < 0) {
                 menor = j;
             }
         }
@@ -202,16 +198,13 @@ int n;
 
     int id;
     char buffer[1024];
-
     while (scanf("%d", &id) == 1) {
         if (id == -1) {
             break;
         }
-        int pos = buscaSequencial(veiculos, n, id);
-        if (pos != -1) {
-            formatVeiculo(veiculos[pos], buffer);
-            printf("%s\n", buffer);
-        }
+        selecao(veiculos,n);
+        printf("%s",selecao);
+
     }
     free(veiculos);
     return 0;
