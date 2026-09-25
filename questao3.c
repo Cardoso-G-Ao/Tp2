@@ -198,14 +198,22 @@ int n;
 
     int id;
     char buffer[1024];
+    Veiculo *veiculosOrdenados = (Veiculo*)malloc(n * sizeof(Veiculo));
+    int cont =0;
     while (scanf("%d", &id) == 1) {
         if (id == -1) {
             break;
         }
-        selecao(veiculos,n);
-        printf("%s",selecao);
-
+        int pos = buscaSequencial(veiculos, n, id);
+        veiculosOrdenados[cont] = veiculos[pos];
+        cont++;
+    }
+    selecao(veiculosOrdenados,cont);
+    for(int i = 0 ; i < cont ; i++){
+        formatVeiculo(veiculosOrdenados[i],buffer);
+        printf("%s\n",buffer);
     }
     free(veiculos);
+    free(veiculosOrdenados);
     return 0;
 }
